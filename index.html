@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>…Really?"</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="attitude-surface" id="page-content">
+      <header class="hero">
+        <h1>Welcome to Passive-Aggressive Web</h1>
+        <p class="sub">We are absolutely thrilled you’re here. Truly.</p>
+      </header>
+
+      <section class="controls">
+        <h2>Click Tests</h2>
+        <div class="buttons">
+          <button type="button">Polite Button</button>
+          <button type="button">Suspicious Button</button>
+          <button type="button">Definitely a Button</button>
+          <button type="button" id="test-reaction">Test Reaction</button>
+        </div>
+        <h3>Non-interactive heading (click me)</h3>
+        <div class="box">
+          <p>Just a div. Definitely not a button.</p>
+        </div>
+      </section>
+
+      <section class="content">
+        <h2>Scroll Zone</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tempus, mi a bibendum porttitor, justo nisl egestas magna, nec volutpat nunc sapien et risus. Proin eget ligula at metus commodo luctus.</p>
+        <p>Donec vel dolor at nisl posuere placerat. Aenean volutpat augue nec turpis maximus, sed fermentum mauris tincidunt. Morbi ac tortor nec augue viverra auctor.</p>
+        <p>Curabitur quis semper turpis. In hac habitasse platea dictumst. Sed dignissim sem sed nibh finibus, non facilisis nisi vehicula.</p>
+        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nullam accumsan, orci vitae lacinia tempor, sem lorem vestibulum lorem, at molestie ex leo nec risus.</p>
+        <p>Phasellus in arcu vitae ipsum laoreet porttitor. Suspendisse laoreet erat vel sem sagittis, nec interdum ipsum fermentum.</p>
+        <p>Quisque pretium lectus eget felis molestie, at imperdiet neque suscipit. Etiam posuere, sem vel dapibus venenatis, mauris lacus commodo eros, sed tincidunt libero justo vitae orci.</p>
+        <p>Nam varius tellus vel est euismod, at hendrerit leo luctus. In id aliquet lorem. Morbi sollicitudin magna sit amet eros luctus tincidunt.</p>
+        <p>Aliquam erat volutpat. Pellentesque posuere nibh at ligula fermentum, et tristique purus efficitur. Ut sodales consequat risus, vitae fermentum mi blandit a.</p>
+        <p>Suspendisse varius nisl in lorem posuere, id cursus nibh tincidunt. Maecenas at mi ex. Integer congue tincidunt ipsum, vitae volutpat lorem.</p>
+        <p>Morbi malesuada justo nec enim iaculis, a congue turpis posuere. Sed ac ultrices justo, ut tempus lacus. Etiam bibendum ex libero.</p>
+        <p>Scroll more. Yes, this is on purpose. We’re watching.</p>
+        <p>Almost there.</p>
+        <p>Still scrolling? Bold.</p>
+        <p>Just a little more. Or don’t. We won’t judge (much).</p>
+        <p>Okay, now you’re definitely at the bottom.</p>
+      </section>
+
+      <footer class="footer">
+        <div class="message" id="judgment-message">…</div>
+        <small>Try switching tabs. We’ll notice.</small>
+      </footer>
+    </div>
+
+    <aside class="debug" id="attitude-debug" aria-live="polite">
+      <div class="debug-title">Attitude Monitor</div>
+      <div><strong>Score:</strong> <span id="debug-score">0</span></div>
+      <div><strong>Level:</strong> <span id="debug-level">Neutral</span></div>
+      <div><strong>Last reason:</strong> <span id="debug-reason">—</span></div>
+      <div><strong>Status:</strong> <span id="debug-status">Starting…</span></div>
+    </aside>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
