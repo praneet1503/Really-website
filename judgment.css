@@ -10,8 +10,39 @@
   animation: judgment-blink 1s steps(2, start) infinite;
 }
 
+.judgment-bounce {
+  animation: judgment-bounce 0.45s ease;
+}
+
+.judgment-shake {
+  animation: judgment-shake 0.6s ease;
+}
+
+.judgment-pop {
+  animation: judgment-pop 0.5s ease;
+}
+
 @keyframes judgment-blink {
   to { opacity: 0; }
+}
+
+@keyframes judgment-bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+}
+
+@keyframes judgment-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+@keyframes judgment-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+  100% { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {

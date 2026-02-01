@@ -2,53 +2,16 @@
 // Target element: <div id="judgment"></div>
 
 import Attitude from "./attitudeSystem.js";
-import anime from "animejs";
 
 const DEFAULTS = Object.freeze({
   typeSpeedMs: 24,
   reduceMotion: window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
 });
 
-let activeTimer = null;
-
-function clearTimers() {
-  if (activeTimer) {
-    clearTimeout(activeTimer);
-    activeTimer = null;
-  }
-}
-
-function animateBounce(el, reduceMotion) {
-  if (!el || reduceMotion) return;
-  anime.remove(el);
-  anime({
-    targets: el,
-    translateY: [0, -8, 0],
-    duration: 500,
-    easing: "easeOutQuad",
-  });
-}
-
-function animateShake(el, reduceMotion) {
-  if (!el || reduceMotion) return;
-  anime.remove(el);
-  anime({
-    targets: el,
-    translateX: [0, -4, 4, -2, 2, 0],
-    duration: 600,
-    easing: "easeInOutSine",
-  });
-}
-
-function animatePop(el, reduceMotion) {
-  if (!el || reduceMotion) return;
-  anime.remove(el);
-  anime({
-    targets: el,
-    scale: [1, 1.06, 1],
-    duration: 450,
-    easing: "easeOutBack",
-  });
+function setClassForDuration(el, className, durationMs = 500) {
+  if (!el) return;
+  el.classList.add(className);
+  setTimeout(() => el.classList.remove(className), durationMs);
 }
 
 function typewriter(el, text, speedMs, reduceMotion) {
@@ -80,7 +43,6 @@ export function showJudgmentMessage(msg, options = {}) {
   const el = document.getElementById("judgment");
   if (!el) return;
 
-  clearTimers();
   typewriter(el, msg, config.typeSpeedMs, config.reduceMotion);
 }
 
@@ -97,10 +59,10 @@ export function initJudgmentAnimations(options = {}) {
 
   // Hook: Attitude level changes trigger a text animation.
   Attitude.onLevelChange(({ level }) => {
-    if (level === "Disappointed") animateShake(el, config.reduceMotion);
-    else if (level === "Judgy") animateShake(el, config.reduceMotion);
-    else if (level === "Done With You") animatePop(el, config.reduceMotion);
-    else animateBounce(el, config.reduceMotion);
+    if (level === "Disappointed") setClassForDuration(el, "judgment-shake", 600);
+    else if (level === "Judgy") setClassForDuration(el, "judgment-shake", 600);
+    else if (level === "Done With You") setClassForDuration(el, "judgment-pop", 600);
+    else setClassForDuration(el, "judgment-bounce", 500);
   });
 
   return {
