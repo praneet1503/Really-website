@@ -1,0 +1,194 @@
+/* Cartoon Animation Styles: keyframes + classes for playful UI motion */
+
+:root {
+  --mood-animation-speed: 1;
+}
+
+/* Typewriter cursor (optional) */
+.typewriter::after {
+  content: "|";
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  to { opacity: 0; }
+}
+
+/* Mood change animations */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-3px); }
+  40% { transform: translateX(3px); }
+  60% { transform: translateX(-2px); }
+  80% { transform: translateX(2px); }
+}
+
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(1deg); }
+  50% { transform: rotate(-1deg); }
+  75% { transform: rotate(0.6deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.anim-bounce {
+  animation: bounce calc(0.6s * var(--mood-animation-speed)) ease;
+}
+
+.anim-shake {
+  animation: shake calc(0.5s * var(--mood-animation-speed)) ease;
+}
+
+.anim-wobble {
+  animation: wobble calc(0.7s * var(--mood-animation-speed)) ease;
+}
+
+/* Scroll wobble for content surface */
+.attitude-surface.wobble {
+  animation: wobble 0.5s ease;
+}
+
+/* Hover jiggle for buttons and icons */
+button:hover,
+select:hover,
+a:hover,
+[role="button"]:hover {
+  animation: jiggle 0.35s ease-in-out;
+}
+
+@keyframes jiggle {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-2px) rotate(-1deg); }
+  100% { transform: translateY(0); }
+}
+
+/* Parallax layers */
+.parallax {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.layer {
+  position: absolute;
+  inset: -10% -10% -10% -10%;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.2s ease;
+  background-repeat: no-repeat;
+}
+
+.layer-back {
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.6), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(255, 255, 255, 0.55), transparent 45%);
+  background-size: 300px 200px, 260px 200px;
+  background-position: 10% 15%, 80% 20%;
+  opacity: 0.6;
+}
+
+.layer-mid {
+  background-image: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.7), transparent 45%),
+    radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.7), transparent 45%);
+  background-size: 280px 200px, 240px 200px;
+  background-position: 20% 45%, 70% 55%;
+  opacity: 0.5;
+}
+
+.layer-front {
+  background-image: radial-gradient(circle at 50% 70%, rgba(255, 255, 255, 0.8), transparent 50%);
+  background-size: 220px 160px;
+  background-position: 50% 70%;
+  opacity: 0.35;
+}
+
+.layer[data-depth] {
+  transform: translate3d(0, var(--scroll-offset, 0px), 0);
+}
+
+/* Mascot widget */
+.mascot {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 9998;
+  width: 84px;
+  height: 84px;
+  pointer-events: none;
+}
+
+.mascot-face {
+  width: 100%;
+  height: 100%;
+  background: #ffe9c7;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.mascot-eye {
+  width: 10px;
+  height: 12px;
+  background: #222;
+  border-radius: 50%;
+  position: absolute;
+  top: 28px;
+  transition: transform 0.3s ease;
+}
+
+.mascot-eye.left { left: 24px; }
+.mascot-eye.right { right: 24px; }
+
+.mascot-mouth {
+  position: absolute;
+  left: 50%;
+  top: 52px;
+  width: 26px;
+  height: 10px;
+  border-bottom: 3px solid #333;
+  border-radius: 0 0 24px 24px;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+}
+
+.mascot-brow {
+  position: absolute;
+  top: 18px;
+  width: 16px;
+  height: 4px;
+  background: #333;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.mascot-brow.left { left: 18px; }
+.mascot-brow.right { right: 18px; }
+
+/* Expression states */
+#mascot[data-level="Neutral"] .mascot-mouth { border-bottom-width: 3px; }
+#mascot[data-level="Disappointed"] .mascot-mouth { width: 18px; border-bottom-width: 2px; }
+#mascot[data-level="Judgy"] .mascot-brow.left { transform: rotate(15deg); }
+#mascot[data-level="Judgy"] .mascot-brow.right { transform: rotate(-15deg); }
+#mascot[data-level="Done With You"] .mascot-mouth { border-bottom-width: 0; border-top: 3px solid #333; }
+#mascot[data-level="Done With You"] .mascot-eye { transform: scaleY(0.6); }
+
+/* Respectful = cheerful */
+#mascot[data-level="Respectful"] .mascot-mouth { width: 30px; border-bottom-width: 4px; }
+#mascot[data-level="Respectful"] .mascot-eye { transform: scale(1.1); }
+
+/* Reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

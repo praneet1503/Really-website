@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>…Really?"</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./cartoon.css" />
   </head>
   <body>
+    <div class="parallax" aria-hidden="true">
+      <div class="layer layer-back" data-depth="0.1"></div>
+      <div class="layer layer-mid" data-depth="0.2"></div>
+      <div class="layer layer-front" data-depth="0.35"></div>
+    </div>
+
     <div class="attitude-surface" id="page-content">
       <header class="hero">
         <h1>…Really?”</h1>
@@ -65,6 +72,16 @@
     </aside>
 
     <div class="toast" id="attitude-toast" aria-live="polite"></div>
+
+    <div class="mascot" id="mascot" aria-hidden="true" data-level="Neutral">
+      <div class="mascot-face">
+        <span class="mascot-brow left"></span>
+        <span class="mascot-brow right"></span>
+        <span class="mascot-eye left"></span>
+        <span class="mascot-eye right"></span>
+        <span class="mascot-mouth"></span>
+      </div>
+    </div>
 
     <script type="module" src="./main.js"></script>
   </body>

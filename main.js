@@ -1,6 +1,7 @@
 import Attitude from "./src/attitudeSystem.js";
 import createBehaviorSystem from "./src/behaviorSystem.js";
 import createAttitudeUI from "./src/uiAttitude.js";
+import initCartoonUI from "./src/cartoonAnimations.js";
 
 // Start the behavior sensors (scroll, click, idle, tab, resize).
 const behaviorSystem = createBehaviorSystem();
@@ -13,6 +14,9 @@ const ui = createAttitudeUI({
   updateMessageOnLevelChange: true,
 });
 ui.init();
+
+// Cartoon animations + parallax + typewriter effects.
+initCartoonUI();
 
 // Optional: expose Attitude for quick console testing.
 window.Attitude = Attitude;
