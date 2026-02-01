@@ -82,3 +82,25 @@ button {
   font-weight: 700;
   margin-bottom: 6px;
 }
+
+.toast {
+  position: fixed;
+  right: 16px;
+  bottom: 120px;
+  z-index: 9999;
+  background: rgba(30, 30, 30, 0.92);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 200ms ease, transform 200ms ease;
+  pointer-events: none;
+  max-width: 240px;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -9,6 +9,11 @@ const DEFAULTS = Object.freeze({
   clickSpamCount: 8, // clicks within window to trigger spam
   clickSpamCooldown: 3000, // cooldown between spam penalties
 
+  // Interactive click feedback. Adjust to change how often it reacts.
+  interactiveRewardDelta: 1,
+  interactiveRewardReason: "Polite click",
+  interactiveRewardCooldown: 1200,
+
   // Non-interactive click tags. Add/remove tags to tune.
   nonInteractiveTags: ["DIV", "SPAN", "P", "H1", "H2", "H3", "H4", "H5", "H6"],
 });
@@ -17,6 +22,7 @@ export function createClickBehaviorTracker(options = {}) {
   const config = { ...DEFAULTS, ...options };
   let clickTimes = [];
   let lastSpamAt = 0;
+  let lastInteractiveAt = 0;
 
   function isInteractiveElement(el) {
     if (!el) return false;
@@ -49,6 +55,15 @@ export function createClickBehaviorTracker(options = {}) {
     const isNonInteractiveTag = config.nonInteractiveTags.includes(tag);
     if (isNonInteractiveTag && !isInteractiveElement(target)) {
       Attitude.changeScore(-1, "That wasn’t interactive");
+      return;
+    }
+
+    // Provide visible feedback for actual interactive clicks.
+    if (isInteractiveElement(target) && now - lastInteractiveAt > config.interactiveRewardCooldown) {
+      lastInteractiveAt = now;
+      if (config.interactiveRewardDelta !== 0) {
+        Attitude.changeScore(config.interactiveRewardDelta, config.interactiveRewardReason);
+      }
     }
   }
 

@@ -23,6 +23,11 @@ const levelEl = document.getElementById("debug-level");
 const reasonEl = document.getElementById("debug-reason");
 const statusEl = document.getElementById("debug-status");
 const testButton = document.getElementById("test-reaction");
+const toastEl = document.getElementById("attitude-toast");
+let toastTimer = null;
+const suspiciousButton = document.getElementById("suspicious-button");
+const politeButton = document.getElementById("polite-button");
+const definitelyNotButton = document.getElementById("definitely-not-button");
 
 if (scoreEl && levelEl && reasonEl) {
   scoreEl.textContent = String(Attitude.getScore());
@@ -32,6 +37,15 @@ if (scoreEl && levelEl && reasonEl) {
   Attitude.onScoreChange(({ score, reason }) => {
     scoreEl.textContent = String(score);
     if (reason) reasonEl.textContent = reason;
+
+    if (toastEl && reason) {
+      toastEl.textContent = reason;
+      toastEl.classList.add("show");
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 1200);
+    }
   });
 
   Attitude.onLevelChange(({ level }) => {
@@ -42,6 +56,32 @@ if (scoreEl && levelEl && reasonEl) {
 if (testButton) {
   testButton.addEventListener("click", () => {
     Attitude.changeScore(1, "Test ping");
+  });
+}
+
+if (politeButton) {
+  politeButton.addEventListener("click", () => {
+    Attitude.changeScore(1, "Polite click");
+  });
+}
+
+if (suspiciousButton) {
+  const randomReactions = [
+    { delta: -1, reason: "Suspicious vibes" },
+    { delta: 1, reason: "Unexpectedly wholesome" },
+    { delta: -2, reason: "Too eager" },
+    { delta: 2, reason: "Bold, yet acceptable" },
+  ];
+
+  suspiciousButton.addEventListener("click", () => {
+    const pick = randomReactions[Math.floor(Math.random() * randomReactions.length)];
+    Attitude.changeScore(pick.delta, pick.reason);
+  });
+}
+
+if (definitelyNotButton) {
+  definitelyNotButton.addEventListener("change", () => {
+    Attitude.changeScore(-1, "Still not a button");
   });
 }
 

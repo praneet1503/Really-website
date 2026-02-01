@@ -9,16 +9,20 @@
   <body>
     <div class="attitude-surface" id="page-content">
       <header class="hero">
-        <h1>Welcome to Passive-Aggressive Web</h1>
+        <h1>…Really?”</h1>
         <p class="sub">We are absolutely thrilled you’re here. Truly.</p>
       </header>
 
       <section class="controls">
         <h2>Click Tests</h2>
         <div class="buttons">
-          <button type="button">Polite Button</button>
-          <button type="button">Suspicious Button</button>
-          <button type="button">Definitely a Button</button>
+          <button type="button" id="polite-button">Polite Button</button>
+          <button type="button" id="suspicious-button">Suspicious Button</button>
+          <select id="definitely-not-button" aria-label="Definitely not a button">
+            <option selected>Definitely not a button</option>
+            <option>Maybe a button?</option>
+            <option>Absolutely not</option>
+          </select>
           <button type="button" id="test-reaction">Test Reaction</button>
         </div>
         <h3>Non-interactive heading (click me)</h3>
@@ -59,6 +63,8 @@
       <div><strong>Last reason:</strong> <span id="debug-reason">—</span></div>
       <div><strong>Status:</strong> <span id="debug-status">Starting…</span></div>
     </aside>
+
+    <div class="toast" id="attitude-toast" aria-live="polite"></div>
 
     <script type="module" src="./main.js"></script>
   </body>
