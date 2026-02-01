@@ -2,7 +2,7 @@
 // No framework dependencies.
 
 import Attitude from "./attitudeSystem.js";
-import { createMessageRotator, JUDGMENT_MESSAGES } from "./messages.js";
+import { getRandomMessage } from "./messages.js";
 
 const DEFAULTS = Object.freeze({
   // Selector for an optional element to show rotating judgment messages.
@@ -24,6 +24,14 @@ const MOODS = Object.freeze({
   JUDGY: "Judgy",
   DONE_WITH_YOU: "Done With You",
   RESPECTFUL: "Respectful",
+});
+
+const LEVEL_MESSAGE_CATEGORY = Object.freeze({
+  [MOODS.RESPECTFUL]: "secret",
+  [MOODS.DONE_WITH_YOU]: "endState",
+  [MOODS.JUDGY]: "click",
+  [MOODS.DISAPPOINTED]: "idle",
+  [MOODS.NEUTRAL]: "scroll",
 });
 
 // Mood definitions use CSS variables for easy theming.
@@ -72,7 +80,7 @@ const MOOD_STYLES = Object.freeze({
     opacity: "1",
   },
   [MOODS.DONE_WITH_YOU]: {
-    // Page greys out, text barely reacts, show “…” messages.
+    // Page greys out, text barely reacts, show "..." messages.
     fontSize: "0.9rem",
     letterSpacing: "-0.01em",
     lineHeight: "1.35",
@@ -181,15 +189,15 @@ export function createAttitudeUI(options = {}) {
   const messageTarget = config.messageTargetSelector
     ? document.querySelector(config.messageTargetSelector)
     : null;
-  const rotator = createMessageRotator(JUDGMENT_MESSAGES);
 
   function updateMessage(level) {
     if (!config.enableMessages || !messageTarget) return;
     if (level === MOODS.DONE_WITH_YOU) {
-      messageTarget.textContent = "…";
+      messageTarget.textContent = "...";
       return;
     }
-    messageTarget.textContent = rotator.next();
+    const category = LEVEL_MESSAGE_CATEGORY[level] || LEVEL_MESSAGE_CATEGORY[MOODS.NEUTRAL];
+    messageTarget.textContent = getRandomMessage(category);
   }
 
   function init() {

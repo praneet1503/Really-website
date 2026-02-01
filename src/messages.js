@@ -1,35 +1,65 @@
-// Judgment messages used by UI helpers.
+// Central message catalog for behavior-aware judgment text.
 
-export const JUDGMENT_MESSAGES = Object.freeze([
-  "…",
-  "Interesting choice.",
-  "Bold.",
-  "Sure.",
-  "I’ll allow it.",
-  "That’s a take.",
-  "We’re just going to scroll past that, huh?",
-  "Cool. Cool cool cool.",
-]);
+export const messages = Object.freeze({
+  scroll: [
+    "That was fast.",
+    "You skimmed.",
+    "Impressive confidence.",
+    "Handle that scrollbar like a pro.",
+  ],
+  click: [
+    "That wasn't interactive.",
+    "Interesting choice.",
+    "You're guessing.",
+    "Polite clicks never go unnoticed.",
+    "Click with purpose.",
+    "Every click counts.",
+    "Careful where you click.",
+  ],
+  idle: [
+    "Still here?",
+    "I'll wait.",
+    "Any moment now.",
+    "Blinking cursor is still watching.",
+    "Thinking is good.",
+    "Did you step away?",
+    "Lost in thought?",
+    "I'm patient, but not forever.",
+  ],
+  tab: [
+    "Welcome back.",
+    "That didn't take long.",
+    "As expected.",
+    "Two tabs but only one focus?",
+    "Multitasking, are we?",
+    "I see you switched tabs.",
+    "Don't worry, I'll be here when you return.",
+  ],
+  endState: [
+    "I've adjusted my expectations.",
+    "We're done pretending.",
+    "It's fine.",
+    "Let's call it a day.",
+  ],
+  secret: [
+    "Wow, look at you behaving!",
+    "You're making me proud.",
+    "Exceptional patience detected.",
+    "Respectful scrolls only.",
+  ],
+});
 
-export function createMessageRotator(messages = JUDGMENT_MESSAGES) {
-  let index = 0;
-  return {
-    next() {
-      const msg = messages[index % messages.length];
-      index += 1;
-      return msg;
-    },
-    random() {
-      const i = Math.floor(Math.random() * messages.length);
-      return messages[i];
-    },
-  };
-}
+const DEFAULT_CATEGORY = "scroll";
 
-export function getRandomJudgmentMessage() {
-  return createMessageRotator().random();
-}
+export const messageCategories = Object.freeze(Object.keys(messages));
 
-export function getNextJudgmentMessage() {
-  return createMessageRotator().next();
+export function getRandomMessage(category = DEFAULT_CATEGORY) {
+  const bucket = messages[category];
+  if (!Array.isArray(bucket) || bucket.length === 0) {
+    const fallback = messages[DEFAULT_CATEGORY];
+    const index = Math.floor(Math.random() * fallback.length);
+    return fallback[index];
+  }
+  const index = Math.floor(Math.random() * bucket.length);
+  return bucket[index];
 }
