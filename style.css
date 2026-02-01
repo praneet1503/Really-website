@@ -36,6 +36,17 @@ button {
   cursor: pointer;
 }
 
+select {
+  padding: 10px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: white;
+  appearance: none;
+  cursor: pointer;
+  font: inherit;
+  min-width: 220px;
+}
+
 .box {
   padding: 16px;
   border-radius: 8px;
