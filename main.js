@@ -6,6 +6,7 @@ import initFlavortownUI from "./src/flavortownUI.js";
 import initMascotReactions from "./src/mascotReactions.js";
 import initJudgmentAnimations from "./src/judgmentAnimations.js";
 import initMoodLayout from "./src/moodLayout.js";
+import initEasterEggs from "./src/easterEggs.js";
 
 // Start the behavior sensors (scroll, click, idle, tab, resize).
 const behaviorSystem = createBehaviorSystem();
@@ -33,6 +34,9 @@ initJudgmentAnimations();
 
 // Mood layout + palette changes by attitude.
 initMoodLayout();
+
+const easterEggs = initEasterEggs();
+window.EasterEggs = easterEggs;
 
 // Optional: expose Attitude for quick console testing.
 window.Attitude = Attitude;

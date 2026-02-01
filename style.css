@@ -115,3 +115,162 @@ select {
   opacity: 1;
   transform: translateY(0);
 }
+
+body.palette-burst {
+  background: linear-gradient(135deg, #fffced 0%, #ffe4f2 60%, #ffe066 100%);
+  transition: background 1200ms ease;
+}
+
+body.good-ending-palette {
+  background: radial-gradient(circle at top, #ffe066, #ff6b6b 60%, #1e1e3b 100%);
+}
+
+#judgment.text-glow {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 18px rgba(255, 111, 0, 0.8);
+}
+
+.confetti-burst {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9998;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 12px;
+  border-radius: 2px;
+  animation: confetti-fall 1.6s ease-in forwards;
+}
+
+.confetti-burst.fade-out .confetti-piece {
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 120vh, 0) rotate(360deg);
+  }
+}
+
+.good-ending-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: overlay-fade 400ms ease;
+}
+
+.good-ending-card {
+  background: #11101a;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 36px;
+  border-radius: 24px;
+  text-align: center;
+  max-width: 320px;
+  color: #fff;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.4);
+}
+
+.good-ending-title {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.25rem;
+}
+
+.good-ending-body {
+  font-size: 1rem;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.good-ending-dismiss {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: none;
+  background: #ffe066;
+  color: #111;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.good-ending-dismiss:focus-visible {
+  outline: 2px solid #111;
+}
+
+.mascot-dance .mascot-face {
+  animation: mascot-dance 1s ease infinite;
+}
+
+.mascot-wave .mascot-face {
+  animation: mascot-wave 1.4s ease infinite;
+}
+
+.mascot-wink .mascot-eye.left {
+  animation: mascot-wink 1.2s steps(1) infinite;
+}
+
+.mascot-spark .mascot-mouth {
+  animation: mascot-spark 1.4s linear infinite;
+}
+
+@keyframes mascot-dance {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes mascot-wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  45% {
+    transform: rotate(5deg);
+  }
+  55% {
+    transform: rotate(-6deg);
+  }
+}
+
+@keyframes mascot-wink {
+  0%, 35%, 100% {
+    transform: scaleY(1);
+  }
+  45% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes mascot-spark {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.01);
+  }
+  50% {
+    text-shadow: 0 0 18px rgba(255, 255, 240, 0.8);
+  }
+}
+
+@keyframes overlay-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

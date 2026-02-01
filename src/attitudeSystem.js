@@ -14,8 +14,8 @@ const LEVELS = Object.freeze({
   DONE_WITH_YOU: "Done With You",
 });
 
-let attitudeScore = 0;
-let attitudeLevel = getLevelForScore(attitudeScore);
+let attitudeScoreValue = 0;
+let attitudeLevel = getLevelForScore(attitudeScoreValue);
 
 function getLevelForScore(score) {
   if (score >= 5) return LEVELS.RESPECTFUL;
@@ -34,16 +34,16 @@ function emitLevelChange(payload) {
 }
 
 function changeScore(delta, reason = "") {
-  const previousScore = attitudeScore;
+  const previousScore = attitudeScoreValue;
   const previousLevel = attitudeLevel;
 
-  attitudeScore += Number(delta) || 0;
-  attitudeLevel = getLevelForScore(attitudeScore);
+  attitudeScoreValue += Number(delta) || 0;
+  attitudeLevel = getLevelForScore(attitudeScoreValue);
 
   emitScoreChange({
     previousScore,
-    score: attitudeScore,
-    delta: attitudeScore - previousScore,
+    score: attitudeScoreValue,
+    delta: attitudeScoreValue - previousScore,
     reason,
     level: attitudeLevel,
   });
@@ -52,19 +52,19 @@ function changeScore(delta, reason = "") {
     emitLevelChange({
       previousLevel,
       level: attitudeLevel,
-      score: attitudeScore,
+      score: attitudeScoreValue,
       reason,
     });
   }
 
   return {
-    score: attitudeScore,
+    score: attitudeScoreValue,
     level: attitudeLevel,
   };
 }
 
 function getScore() {
-  return attitudeScore;
+  return attitudeScoreValue;
 }
 
 function getLevel() {
@@ -84,16 +84,16 @@ function onLevelChange(handler) {
 }
 
 function resetScore(nextScore = 0, reason = "reset") {
-  const previousScore = attitudeScore;
+  const previousScore = attitudeScoreValue;
   const previousLevel = attitudeLevel;
 
-  attitudeScore = Number(nextScore) || 0;
-  attitudeLevel = getLevelForScore(attitudeScore);
+  attitudeScoreValue = Number(nextScore) || 0;
+  attitudeLevel = getLevelForScore(attitudeScoreValue);
 
   emitScoreChange({
     previousScore,
-    score: attitudeScore,
-    delta: attitudeScore - previousScore,
+    score: attitudeScoreValue,
+    delta: attitudeScoreValue - previousScore,
     reason,
     level: attitudeLevel,
   });
@@ -102,13 +102,13 @@ function resetScore(nextScore = 0, reason = "reset") {
     emitLevelChange({
       previousLevel,
       level: attitudeLevel,
-      score: attitudeScore,
+      score: attitudeScoreValue,
       reason,
     });
   }
 
   return {
-    score: attitudeScore,
+    score: attitudeScoreValue,
     level: attitudeLevel,
   };
 }
@@ -128,6 +128,9 @@ const AttitudeSystem = Object.freeze({
   onLevelChange,
   registerHook,
   LEVELS,
+  get attitudeScore() {
+    return attitudeScoreValue;
+  },
 });
 
 export default AttitudeSystem;
