@@ -1,0 +1,159 @@
+/* Flavortown aesthetic: bold colors, playful type, lightweight animation */
+
+:root {
+  --ft-primary: #ff6b35;
+  --ft-accent: #ffd166;
+  --ft-bg: #fff3e6;
+  --ft-text: #2b2b2b;
+  --ft-motion: 1;
+}
+
+body {
+  background: var(--ft-bg);
+  color: var(--ft-text);
+}
+
+h1, h2, h3, .message {
+  font-family: "Comic Neue", "Trebuchet MS", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.message {
+  font-size: 1.15rem;
+  color: var(--ft-primary);
+}
+
+button, select {
+  border: 2px solid var(--ft-primary);
+  box-shadow: 0 6px 0 rgba(255, 107, 53, 0.2);
+}
+
+button:hover, select:hover {
+  animation: ft-jiggle 0.3s ease;
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+/* Typewriter cursor */
+.ft-typewriter::after {
+  content: "▌";
+  margin-left: 2px;
+  animation: ft-blink 1s steps(2, start) infinite;
+}
+
+@keyframes ft-blink {
+  to { opacity: 0; }
+}
+
+/* Mood change animations */
+@keyframes ft-pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes ft-bounce {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+}
+
+@keyframes ft-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+}
+
+@keyframes ft-wobble {
+  0% { transform: rotate(0deg); }
+  30% { transform: rotate(1deg); }
+  60% { transform: rotate(-1deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.ft-pop { animation: ft-pop calc(0.45s * var(--ft-motion)) ease; }
+.ft-bounce { animation: ft-bounce calc(0.6s * var(--ft-motion)) ease; }
+.ft-shake { animation: ft-shake calc(0.6s * var(--ft-motion)) ease; }
+.ft-wobble { animation: ft-wobble calc(0.65s * var(--ft-motion)) ease; }
+
+/* Scroll-linked wobble (can be triggered by scroll module) */
+.attitude-surface.wobble {
+  animation: ft-wobble 0.5s ease;
+}
+
+/* Simple animated background shimmer */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 10% 10%, rgba(255, 209, 102, 0.25), transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(255, 90, 95, 0.2), transparent 45%);
+  animation: ft-float 12s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ft-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(6px); }
+}
+
+/* Flame burst icon */
+#flame-burst {
+  position: fixed;
+  right: 16px;
+  bottom: 180px;
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+#flame-burst.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+#flame-burst .flame {
+  width: 18px;
+  height: 24px;
+  background: radial-gradient(circle at 50% 30%, #fff5b7, #ff8c00 60%, #ff3b3b 90%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: ft-flame 0.6s ease-in-out infinite;
+}
+
+@keyframes ft-flame {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Mascot motion */
+#mascot[data-level="Neutral"] .mascot-face { animation: ft-idle 2s ease-in-out infinite; }
+#mascot[data-level="Disappointed"] .mascot-face { transform: translateY(2px); }
+#mascot[data-level="Judgy"] .mascot-face { animation: ft-shake 0.5s ease; }
+#mascot[data-level="Done With You"] .mascot-face { opacity: 0.6; }
+
+@keyframes ft-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Cursor hesitation via transition delay on interactive elements */
+body.mood-judgy button,
+body.mood-done-with-you button,
+body.mood-judgy a,
+body.mood-done-with-you a {
+  transition-delay: 120ms;
+}
+
+/* Reduced motion fallback */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

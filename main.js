@@ -2,6 +2,7 @@ import Attitude from "./src/attitudeSystem.js";
 import createBehaviorSystem from "./src/behaviorSystem.js";
 import createAttitudeUI from "./src/uiAttitude.js";
 import initCartoonUI from "./src/cartoonAnimations.js";
+import initFlavortownUI from "./src/flavortownUI.js";
 
 // Start the behavior sensors (scroll, click, idle, tab, resize).
 const behaviorSystem = createBehaviorSystem();
@@ -18,6 +19,9 @@ ui.init();
 // Cartoon animations + parallax + typewriter effects.
 initCartoonUI();
 
+// Flavortown aesthetic + mascot mood reactions.
+initFlavortownUI();
+
 // Optional: expose Attitude for quick console testing.
 window.Attitude = Attitude;
 
@@ -26,7 +30,6 @@ const scoreEl = document.getElementById("debug-score");
 const levelEl = document.getElementById("debug-level");
 const reasonEl = document.getElementById("debug-reason");
 const statusEl = document.getElementById("debug-status");
-const testButton = document.getElementById("test-reaction");
 const toastEl = document.getElementById("attitude-toast");
 let toastTimer = null;
 const suspiciousButton = document.getElementById("suspicious-button");
@@ -54,12 +57,6 @@ if (scoreEl && levelEl && reasonEl) {
 
   Attitude.onLevelChange(({ level }) => {
     levelEl.textContent = level;
-  });
-}
-
-if (testButton) {
-  testButton.addEventListener("click", () => {
-    Attitude.changeScore(1, "Test ping");
   });
 }
 
