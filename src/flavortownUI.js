@@ -112,7 +112,7 @@ export function updateFlavortownMood(level) {
   const flame = document.getElementById("flame-burst");
   if (flame) setClassForDuration(flame, "show", DEFAULTS.flameBurstDurationMs);
 
-  const messageEl = document.getElementById("judgment-message");
+  const messageEl = document.getElementById("judgment");
   if (messageEl && messageEl.textContent) {
     typewriter(messageEl, messageEl.textContent, DEFAULTS.typewriterSpeedMs, DEFAULTS.reduceMotion);
   }

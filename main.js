@@ -3,6 +3,9 @@ import createBehaviorSystem from "./src/behaviorSystem.js";
 import createAttitudeUI from "./src/uiAttitude.js";
 import initCartoonUI from "./src/cartoonAnimations.js";
 import initFlavortownUI from "./src/flavortownUI.js";
+import initMascotReactions from "./src/mascotReactions.js";
+import initJudgmentAnimations from "./src/judgmentAnimations.js";
+import initMoodLayout from "./src/moodLayout.js";
 
 // Start the behavior sensors (scroll, click, idle, tab, resize).
 const behaviorSystem = createBehaviorSystem();
@@ -10,7 +13,7 @@ behaviorSystem.start();
 
 // Start UI mood syncing with Attitude level.
 const ui = createAttitudeUI({
-  messageTargetSelector: "#judgment-message",
+  messageTargetSelector: "#judgment",
   enableMessages: true,
   updateMessageOnLevelChange: true,
 });
@@ -21,6 +24,15 @@ initCartoonUI();
 
 // Flavortown aesthetic + mascot mood reactions.
 initFlavortownUI();
+
+// Mascot reactions (uses #mascot element).
+initMascotReactions();
+
+// Judgment message animations (typewriter + bounce/shake/pop).
+initJudgmentAnimations();
+
+// Mood layout + palette changes by attitude.
+initMoodLayout();
 
 // Optional: expose Attitude for quick console testing.
 window.Attitude = Attitude;

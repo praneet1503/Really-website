@@ -1,0 +1,59 @@
+/* Mood Layout Styles
+   Uses CSS variables set by moodLayout.js.
+   Apply to body and .attitude-surface for smooth transitions.
+*/
+
+:root {
+  --mood-bg: #ffffff;
+  --mood-text: #2b2b2b;
+  --mood-muted: #666;
+  --mood-spacing: 24px;
+  --mood-cursor-delay: 0ms;
+  --mood-opacity: 1;
+  --mood-transition: 450ms ease;
+}
+
+body {
+  background: var(--mood-bg);
+  color: var(--mood-text);
+  transition: background var(--mood-transition), color var(--mood-transition);
+}
+
+.attitude-surface {
+  opacity: var(--mood-opacity);
+  transition: opacity var(--mood-transition), transform var(--mood-transition);
+}
+
+section,
+header,
+footer {
+  padding-left: var(--mood-spacing);
+  padding-right: var(--mood-spacing);
+  transition: padding var(--mood-transition);
+}
+
+.sub,
+small {
+  color: var(--mood-muted);
+  transition: color var(--mood-transition);
+}
+
+/* Cursor hesitation for judgy moods */
+button,
+a,
+select,
+input,
+textarea {
+  transition-delay: var(--mood-cursor-delay);
+}
+
+/* Done With You: text barely reacts */
+:root[data-mood="Done With You"] .message {
+  opacity: 0.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

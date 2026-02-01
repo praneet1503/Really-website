@@ -1,0 +1,130 @@
+/* Mascot Reactions Styles
+   Target HTML: <div id="mascot"></div>
+   You can replace the generated markup with an SVG or sprite sheet.
+*/
+
+#mascot {
+  position: fixed; /* adjust for your layout */
+  left: 16px;
+  bottom: 16px;
+  width: 84px;
+  height: 84px;
+  z-index: 9998;
+  pointer-events: none;
+}
+
+.mascot-face {
+  width: 100%;
+  height: 100%;
+  background: #ffe1b2;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  position: relative;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mascot-eye {
+  width: 10px;
+  height: 12px;
+  background: #222;
+  border-radius: 50%;
+  position: absolute;
+  top: 28px;
+  transition: transform 0.3s ease;
+}
+
+.mascot-eye.left { left: 24px; }
+.mascot-eye.right { right: 24px; }
+
+.mascot-mouth {
+  position: absolute;
+  left: 50%;
+  top: 52px;
+  width: 26px;
+  height: 10px;
+  border-bottom: 3px solid #333;
+  border-radius: 0 0 24px 24px;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+}
+
+.mascot-brow {
+  position: absolute;
+  top: 18px;
+  width: 16px;
+  height: 4px;
+  background: #333;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.mascot-brow.left { left: 18px; }
+.mascot-brow.right { right: 18px; }
+
+.mascot-shoulders {
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 46px;
+  height: 12px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.08);
+  transform: translateX(-50%);
+  transition: transform 0.3s ease;
+}
+
+@keyframes mascot-idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes mascot-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  50% { transform: translateX(2px); }
+  75% { transform: translateX(-1px); }
+}
+
+/* Neutral → small idle movement */
+#mascot[data-level="Neutral"] .mascot-face {
+  animation: mascot-idle 2s ease-in-out infinite;
+}
+
+/* Disappointed → subtle frown + slouch */
+#mascot[data-level="Disappointed"] .mascot-mouth {
+  width: 18px;
+  border-bottom-width: 2px;
+}
+
+#mascot[data-level="Disappointed"] .mascot-face {
+  transform: translateY(2px);
+}
+
+/* Judgy → eyes narrow + small shake */
+#mascot[data-level="Judgy"] .mascot-eye {
+  transform: scaleY(0.6);
+}
+
+#mascot[data-level="Judgy"] .mascot-face {
+  animation: mascot-shake 0.5s ease;
+}
+
+/* Done With You → exaggerated shrug + fade out */
+#mascot[data-level="Done With You"] .mascot-face {
+  opacity: 0.6;
+  transform: translateY(4px);
+}
+
+#mascot[data-level="Done With You"] .mascot-shoulders {
+  transform: translateX(-50%) translateY(4px);
+}
+
+/* Reduced motion fallback */
+.mascot-reduce-motion *,
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

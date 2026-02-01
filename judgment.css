@@ -1,0 +1,21 @@
+/* Judgment message animations (typewriter cursor + reduced-motion fallback) */
+
+#judgment {
+  position: relative;
+}
+
+.judgment-typewriter::after {
+  content: "▌";
+  margin-left: 2px;
+  animation: judgment-blink 1s steps(2, start) infinite;
+}
+
+@keyframes judgment-blink {
+  to { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .judgment-typewriter::after {
+    animation: none;
+  }
+}

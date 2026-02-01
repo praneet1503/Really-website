@@ -133,7 +133,7 @@ export function updateMoodAnimations(level) {
   setMascotExpression(level);
 
   // Typewriter refresh for the main judgment message.
-  const messageEl = document.getElementById("judgment-message");
+  const messageEl = document.getElementById("judgment");
   if (messageEl && messageEl.textContent) {
     typewriter(messageEl, messageEl.textContent, DEFAULTS.typewriterSpeedMs, DEFAULTS.typewriterCursor);
   }
