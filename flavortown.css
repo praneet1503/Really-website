@@ -1,4 +1,4 @@
-/* Flavortown aesthetic: bold colors, playful type, lightweight animation */
+/* Flavortown aesthetic*/
 
 :root {
   --ft-primary: #ff6b35;
@@ -83,8 +83,6 @@ button:active {
 .attitude-surface.wobble {
   animation: ft-wobble 0.5s ease;
 }
-
-/* Simple animated background shimmer */
 body::before {
   content: "";
   position: fixed;
@@ -95,13 +93,10 @@ body::before {
   pointer-events: none;
   z-index: 0;
 }
-
 @keyframes ft-float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(6px); }
 }
-
-/* Flame burst icon */
 #flame-burst {
   position: fixed;
   right: 16px;
@@ -112,12 +107,10 @@ body::before {
   transition: opacity 0.2s ease, transform 0.2s ease;
   pointer-events: none;
 }
-
 #flame-burst.show {
   opacity: 1;
   transform: scale(1);
 }
-
 #flame-burst .flame {
   width: 18px;
   height: 24px;
@@ -125,32 +118,24 @@ body::before {
   border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
   animation: ft-flame 0.6s ease-in-out infinite;
 }
-
 @keyframes ft-flame {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.1); }
 }
-
-/* Mascot motion */
 #mascot[data-level="Neutral"] .mascot-face { animation: ft-idle 2s ease-in-out infinite; }
 #mascot[data-level="Disappointed"] .mascot-face { transform: translateY(2px); }
 #mascot[data-level="Judgy"] .mascot-face { animation: ft-shake 0.5s ease; }
 #mascot[data-level="Done With You"] .mascot-face { opacity: 0.6; }
-
 @keyframes ft-idle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-3px); }
 }
-
-/* Cursor hesitation via transition delay on interactive elements */
 body.mood-judgy button,
 body.mood-done-with-you button,
 body.mood-judgy a,
 body.mood-done-with-you a {
   transition-delay: 120ms;
 }
-
-/* Reduced motion fallback */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation: none !important;
