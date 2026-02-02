@@ -33,11 +33,6 @@ A playful judgment-themed landing page that watches your every move with a Flavo
 - Every score change pushes new judgment copy via the typewriter-driven animation, and the Attitude level determines palette swaps, cursor delays, and mascot expressions.
 - Secret rewards unlock when you pair perfect scroll depth, click streaks, high scores, or the FLAVOR key combo; confetti, mascot dances, glow effects, and a "good ending" overlay celebrate the behavior.
 
-## Screenshots / Demo
-- Banner placeholder: *(insert hero image or GIF showing the judgment header and mascot)*
-- Mascot reaction snapshot: *(replace with mascot animation still)*
-- Mood change demo: *(suggest adding a short GIF of the palette shifting after an attitude tier jump)*
-
 ## Contributing
 Feel free to dive into the modular scripts under `src/` to tweak messages, instrumentation, or animations; separating behaviors, attitude logic, and UI helpers makes adding new detectors, moods, or Easter eggs straightforward.
 
